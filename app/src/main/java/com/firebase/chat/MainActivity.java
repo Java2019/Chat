@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 import com.firebase.ui.auth.AuthUI;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(FirebaseAuth.getInstance(FirebaseApp.initializeApp(getApplicationContext())).getCurrentUser() == null) {
+        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/sign up activity
             startActivityForResult(
                     AuthUI.getInstance()
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                     .show();
 
             // Load chat room contents
-            displayChatMessages();
+            //displayChatMessages();
         }
     }
     private void displayChatMessages() {

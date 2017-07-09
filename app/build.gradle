@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.firebase.chat"
-        minSdkVersion 17
+        minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -27,3 +27,4 @@ dependencies {
     compile 'com.firebaseui:firebase-ui:0.6.0'
 }
 
+apply plugin: 'com.google.gms.google-services'
