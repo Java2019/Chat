@@ -143,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
                                     "You have been signed out.",
                                     Toast.LENGTH_LONG)
                                     .show();
-
                             // Close activity
                             finish();
                         }
