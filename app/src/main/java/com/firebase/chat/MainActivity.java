@@ -2,17 +2,22 @@ package com.firebase.chat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
     private int SIGN_IN_REQUEST_CODE = 1;
-    //private FirebaseApp firebaseApp = FirebaseApp.initializeApp(this);
+    private FirebaseListAdapter<ChatMessage> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,31 @@ public class MainActivity extends AppCompatActivity {
             // Load chat room contents
             //displayChatMessages();
         }
+
+        FloatingActionButton fab =
+                (FloatingActionButton)findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                EditText input = (EditText)findViewById(R.id.input);
+
+                // Read the input field and push a new instance
+                // of ChatMessage to the Firebase database
+                FirebaseDatabase.getInstance()
+                        .getReference()
+                        .push()
+                        .setValue(new ChatMessage(input.getText().toString(),
+                                FirebaseAuth.getInstance()
+                                        .getCurrentUser()
+                                        .getDisplayName())
+                        );
+
+                // Clear the input
+                input.setText("");
+            }
+        });
     }
     private void displayChatMessages() {
 
